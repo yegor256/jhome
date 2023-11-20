@@ -11,7 +11,10 @@
 ![Lines of code](https://img.shields.io/tokei/lines/github/yegor256/jhome)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](https://github.com/yegor256/jhome/blob/master/LICENSE.txt)
 
-It's a finder of `JAVA_HOME`.
+In your Java application you may want to run another Java application.
+In order to do this, you need to know where is the `bin/java` executable.
+It's in the `JAVA_HOME` (environment variable), which is not always set.
+Instead of looking for this place manually, just use this small one-class library.
 
 First, you add this to your `pom.xml`:
 
