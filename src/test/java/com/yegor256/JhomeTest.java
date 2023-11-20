@@ -46,7 +46,7 @@ final class JhomeTest {
     void findsJava() {
         MatcherAssert.assertThat(
             new Jhome().path("bin/java"),
-            Matchers.hasToString(Matchers.containsString("bin/java"))
+            Matchers.hasToString(Matchers.endsWith("java"))
         );
     }
 
