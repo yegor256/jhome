@@ -27,16 +27,22 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 /**
- * Finds JAVA_HOME even if the environment is not set.
+ * Finds {@code JAVA_HOME} even if the environment variable is not set.
+ *
+ * <p>Use it like this:</p>
  *
  * <code><pre> Path p = new Jhome().path("bin/java");</pre></code>
+ *
+ * <p>You will get the absolute location of the {@code bin/java}
+ * executable binary, if it exists. If it doesn't exist, a runtime
+ * exception will be thrown.</p>
  *
  * @since 0.0.1
  */
 public final class Jhome {
 
     /**
-     * Home.
+     * Home, where {@code JAVA_HOME} points to.
      */
     private final Path home;
 
@@ -48,8 +54,16 @@ public final class Jhome {
     }
 
     /**
-     * Find the file inside JAVA_HOME.
-     * @param loc Location, e.g. "bin/java"
+     * Get the {@code JAVA_HOME}.
+     * @return The path of it
+     */
+    public Path path() {
+        return this.home;
+    }
+
+    /**
+     * Find the file inside {@code JAVA_HOME}.
+     * @param loc Location, e.g. {@code "bin/java"}
      * @return The path of it
      */
     public Path path(final String loc) {

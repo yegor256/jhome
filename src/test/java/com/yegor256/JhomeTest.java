@@ -35,6 +35,14 @@ import org.junit.jupiter.api.Test;
 final class JhomeTest {
 
     @Test
+    void findsHome() {
+        MatcherAssert.assertThat(
+            new Jhome().path().toFile().exists(),
+            Matchers.is(true)
+        );
+    }
+
+    @Test
     void findsJava() {
         MatcherAssert.assertThat(
             new Jhome().path("bin/java"),
