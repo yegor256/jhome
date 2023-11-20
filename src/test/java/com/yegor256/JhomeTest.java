@@ -53,7 +53,7 @@ final class JhomeTest {
     @Test
     void findsRealFile() {
         MatcherAssert.assertThat(
-            new Jhome().path("bin/javac").toFile().exists(),
+            new Jhome().path("bin/java").toFile().exists(),
             Matchers.is(true)
         );
     }
