@@ -23,8 +23,10 @@
  */
 package com.yegor256;
 
+import java.nio.file.Path;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
+import org.hamcrest.io.FileMatchers;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -51,18 +53,40 @@ final class JhomeTest {
     }
 
     @Test
-    void findsJava() {
-        MatcherAssert.assertThat(
-            new Jhome().path("bin/java"),
-            Matchers.hasToString(Matchers.endsWith("java"))
-        );
-    }
-
-    @Test
     void findsRealFile() {
         MatcherAssert.assertThat(
             new Jhome().path("bin/java").toFile().exists(),
             Matchers.is(true)
+        );
+    }
+
+    @Test
+    void findsJavac() {
+        final Path javac = new Jhome().javac();
+        MatcherAssert.assertThat(
+            "java compiler filename should be 'javac'",
+            javac,
+            Matchers.hasToString(Matchers.endsWith("javac"))
+        );
+        MatcherAssert.assertThat(
+            "javac binary file doesn't exist. If you run this test, then you should have a JDK installed",
+            javac.toFile(),
+            FileMatchers.anExistingFile()
+        );
+    }
+
+    @Test
+    void findsJava() {
+        final Path java = new Jhome().java();
+        MatcherAssert.assertThat(
+            "java binary filename should be 'java'",
+            java,
+            Matchers.hasToString(Matchers.endsWith("java"))
+        );
+        MatcherAssert.assertThat(
+            "java binary file doesn't exist. If you run this test, then you should have a JDK installed",
+            java.toFile(),
+            FileMatchers.anExistingFile()
         );
     }
 

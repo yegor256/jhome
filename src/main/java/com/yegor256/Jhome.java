@@ -71,6 +71,22 @@ public final class Jhome {
     }
 
     /**
+     * Find the {@code java} binary.
+     * @return The path of it
+     */
+    public Path java() {
+        return this.home.resolve("bin").resolve("java");
+    }
+
+    /**
+     * Find the {@code javac} binary.
+     * @return The path of it
+     */
+    public Path javac() {
+        return this.home.resolve("bin").resolve("javac");
+    }
+
+    /**
      * Find home.
      * @return The path of it
      */
