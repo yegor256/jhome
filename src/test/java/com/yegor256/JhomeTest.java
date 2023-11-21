@@ -43,6 +43,14 @@ final class JhomeTest {
     }
 
     @Test
+    void findsCorrectHome() {
+        MatcherAssert.assertThat(
+            new Jhome().path().resolve("bin/java").toFile().exists(),
+            Matchers.is(true)
+        );
+    }
+
+    @Test
     void findsJava() {
         MatcherAssert.assertThat(
             new Jhome().path("bin/java"),
