@@ -81,6 +81,10 @@ public final class Jhome {
     /**
      * Find the {@code javac} binary.
      * @return The path of it
+     * @todo #5 The javac binary might not be available in JRE.
+     *  We should check if we are running in JDK or JRE and somehow decide what to
+     *  return in this case or even throw an exception in case of JRE. Maybe an
+     *  {@code Optional<Path>} is also a solution here.
      */
     public Path javac() {
         return this.home.resolve("bin").resolve("javac");

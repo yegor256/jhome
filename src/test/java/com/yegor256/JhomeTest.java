@@ -28,6 +28,8 @@ import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.hamcrest.io.FileMatchers;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.condition.EnabledForJreRange;
+import org.junit.jupiter.api.condition.JRE;
 
 /**
  * Test case for {@link Jhome}.
@@ -61,6 +63,7 @@ final class JhomeTest {
     }
 
     @Test
+    @EnabledForJreRange(min = JRE.JAVA_9)
     void findsJavac() {
         final Path javac = new Jhome().javac();
         MatcherAssert.assertThat(
