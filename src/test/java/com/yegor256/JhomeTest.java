@@ -58,49 +58,44 @@ final class JhomeTest {
     }
 
     @Test
-    void findsJava() {
-        final Path java = new Jhome().java();
-        MatcherAssert.assertThat(
-            "java binary filename should be 'java'",
-            java,
-            Matchers.hasToString(Matchers.endsWith("java"))
-        );
+    void findsJavaOnAnyOs() {
         MatcherAssert.assertThat(
             "java binary file doesn't exist. If you run this test, then you should have a JDK installed",
-            java.toFile(),
+            new Jhome().java().toFile(),
+            FileMatchers.anExistingFile()
+        );
+    }
+
+    /**
+     * Here we restrict the test to run only on Java 9+.
+     * Since before Java 9, the "javac" binary was shipped separately in JDK.
+     * JRE pack did not contain it.
+     */
+    @Test
+    @EnabledForJreRange(min = JRE.JAVA_9)
+    void findsJavacOnAnyOs() {
+        MatcherAssert.assertThat(
+            "javac binary file doesn't exist. If you run this test, then you should have a JDK installed",
+            new Jhome().javac().toFile(),
             FileMatchers.anExistingFile()
         );
     }
 
     @Test
     @DisabledOnOs(OS.WINDOWS)
-    void findsRealFile() {
+    void findsRealFileOnUnixOs() {
         MatcherAssert.assertThat(
+            "java binary file doesn't exist. If you run this test, then you should have a JDK or JRE installed",
             new Jhome().path("bin/java").toFile().exists(),
             Matchers.is(true)
         );
     }
 
-    @Test
-    @EnabledForJreRange(min = JRE.JAVA_9)
-    void findsJavac() {
-        final Path javac = new Jhome().javac();
-        MatcherAssert.assertThat(
-            "java compiler filename should be 'javac'",
-            javac,
-            Matchers.hasToString(Matchers.endsWith("javac"))
-        );
-        MatcherAssert.assertThat(
-            "javac binary file doesn't exist. If you run this test, then you should have a JDK installed",
-            javac.toFile(),
-            FileMatchers.anExistingFile()
-        );
-    }
-
     @EnabledOnOs(OS.WINDOWS)
-    void findsRealExeFile() {
+    void findsRealExeFileOnWindowsOs() {
         MatcherAssert.assertThat(
-            new Jhome().path("bin\\java.exe").toFile().exists(),
+            "java.exe binary file doesn't exist. If you run this test, then you should have a JDK or JRE installed",
+            new Jhome().java().toFile().exists(),
             Matchers.is(true)
         );
     }
