@@ -81,9 +81,14 @@ final class JhomeTest {
      */
     @Test
     @EnabledForJreRange(min = JRE.JAVA_9)
-    void findsJavacOnAnyOs() {
+    void findsJavacOnAnyOs() throws IOException {
         MatcherAssert.assertThat(
-            "javac binary file doesn't exist. If you run this test, then you should have a JDK installed",
+            String.format(
+                "javac binary file doesn't exist. If you run this test, then you should have a JDK installed. All files in bin folder: %n%s",
+                Files.list(new Jhome().path("bin"))
+                    .map(Path::toString)
+                    .collect(Collectors.joining("\n"))
+            ),
             new Jhome().javac().toFile(),
             FileMatchers.anExistingFile()
         );
