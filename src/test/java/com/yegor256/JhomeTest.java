@@ -23,6 +23,10 @@
  */
 package com.yegor256;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.stream.Collectors;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.hamcrest.io.FileMatchers;
@@ -57,9 +61,14 @@ final class JhomeTest {
     }
 
     @Test
-    void findsJavaOnAnyOs() {
+    void findsJavaOnAnyOs() throws IOException {
         MatcherAssert.assertThat(
-            "java binary file doesn't exist. If you run this test, then you should have a JDK installed",
+            String.format(
+                "java binary file doesn't exist. If you run this test, then you should have a JDK installed. All files in bin folder: %n%s",
+                Files.list(new Jhome().path("bin"))
+                    .map(Path::toString)
+                    .collect(Collectors.joining("\n"))
+            ),
             new Jhome().java().toFile(),
             FileMatchers.anExistingFile()
         );
