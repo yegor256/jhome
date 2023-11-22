@@ -45,7 +45,7 @@ final class JhomeTest {
     @Test
     void findsCorrectHome() {
         MatcherAssert.assertThat(
-            new Jhome().path().resolve("bin/java").toFile().exists(),
+            new Jhome().path().resolve("bin").toFile().exists(),
             Matchers.is(true)
         );
     }
@@ -53,7 +53,7 @@ final class JhomeTest {
     @Test
     void findsJava() {
         MatcherAssert.assertThat(
-            new Jhome().path("bin/java"),
+            new Jhome().path("bin\\java"),
             Matchers.hasToString(Matchers.endsWith("java"))
         );
     }

@@ -23,6 +23,7 @@
  */
 package com.yegor256;
 
+import java.io.File;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
@@ -67,7 +68,9 @@ public final class Jhome {
      * @return The path of it
      */
     public Path path(final String loc) {
-        return this.home.resolve(loc);
+        return this.home.resolve(
+            loc.replace("/", File.separator).replace("\\", File.separator)
+        );
     }
 
     /**
