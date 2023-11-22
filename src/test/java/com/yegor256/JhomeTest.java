@@ -30,6 +30,9 @@ import org.hamcrest.io.FileMatchers;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.condition.EnabledForJreRange;
 import org.junit.jupiter.api.condition.JRE;
+import org.junit.jupiter.api.condition.DisabledOnOs;
+import org.junit.jupiter.api.condition.EnabledOnOs;
+import org.junit.jupiter.api.condition.OS;
 
 /**
  * Test case for {@link Jhome}.
@@ -49,12 +52,28 @@ final class JhomeTest {
     @Test
     void findsCorrectHome() {
         MatcherAssert.assertThat(
-            new Jhome().path().resolve("bin/java").toFile().exists(),
+            new Jhome().path().resolve("bin").toFile().exists(),
             Matchers.is(true)
         );
     }
 
     @Test
+    void findsJava() {
+        final Path java = new Jhome().java();
+        MatcherAssert.assertThat(
+            "java binary filename should be 'java'",
+            java,
+            Matchers.hasToString(Matchers.endsWith("java"))
+        );
+        MatcherAssert.assertThat(
+            "java binary file doesn't exist. If you run this test, then you should have a JDK installed",
+            java.toFile(),
+            FileMatchers.anExistingFile()
+        );
+    }
+
+    @Test
+    @DisabledOnOs(OS.WINDOWS)
     void findsRealFile() {
         MatcherAssert.assertThat(
             new Jhome().path("bin/java").toFile().exists(),
@@ -78,19 +97,11 @@ final class JhomeTest {
         );
     }
 
-    @Test
-    void findsJava() {
-        final Path java = new Jhome().java();
+    @EnabledOnOs(OS.WINDOWS)
+    void findsRealExeFile() {
         MatcherAssert.assertThat(
-            "java binary filename should be 'java'",
-            java,
-            Matchers.hasToString(Matchers.endsWith("java"))
-        );
-        MatcherAssert.assertThat(
-            "java binary file doesn't exist. If you run this test, then you should have a JDK installed",
-            java.toFile(),
-            FileMatchers.anExistingFile()
+            new Jhome().path("bin\\java.exe").toFile().exists(),
+            Matchers.is(true)
         );
     }
-
 }
