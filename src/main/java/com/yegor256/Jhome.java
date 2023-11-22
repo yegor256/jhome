@@ -27,6 +27,7 @@ import java.io.File;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
+import java.util.Locale;
 
 /**
  * Finds {@code JAVA_HOME} even if the environment variable is not set.
@@ -94,11 +95,13 @@ public final class Jhome {
      * @return The extension.
      */
     private static String extension() {
-        if (System.getProperty("os.name").toLowerCase().contains("windows")) {
-            return ".exe";
+        final String result;
+        if (System.getProperty("os.name").toLowerCase(Locale.getDefault()).contains("windows")) {
+            result = ".exe";
         } else {
-            return "";
+            result = "";
         }
+        return result;
     }
 
     /**
