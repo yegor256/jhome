@@ -78,7 +78,7 @@ public final class Jhome {
      * @return The path of it
      */
     public Path java() {
-        return this.home.resolve("bin").resolve("java");
+        return this.path("bin/java");
     }
 
     /**
@@ -90,7 +90,7 @@ public final class Jhome {
      *  {@code Optional<Path>} is also a solution here.
      */
     public Path javac() {
-        return this.home.resolve("bin").resolve("javac");
+        return this.path("bin/javac");
     }
 
     /**
