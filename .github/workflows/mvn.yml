@@ -4,11 +4,9 @@ on:
   push:
     branches:
       - master
-      - 5_java_javac
   pull_request:
     branches:
       - master
-  workflow_dispatch:
 jobs:
   mvn:
     runs-on: ${{ matrix.os }}
