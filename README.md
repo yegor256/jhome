@@ -14,11 +14,13 @@
 In your Java application you may want to run another Java application.
 In order to do this, you need to know where is the `bin/java` executable.
 It's in the `JAVA_HOME` (environment variable), which is not always set.
-Instead of looking for this place manually, just use this small one-class library.
+Instead of looking for this place manually, just use this small one-class
+library.
 
 First, you add this to your `pom.xml`:
 
 ```xml
+
 <dependency>
   <groupId>com.yegor256</groupId>
   <artifactId>jhome</artifactId>
@@ -34,10 +36,19 @@ Path p = new Jhome().path("bin/java");
 ```
 
 The result is the location of `bin/java` inside `JAVA_HOME`.
+Also, you can use `java()` and `javac()` methods in order to get the full path
+to `java` and `javac` executables respectively:
+
+```java
+import com.yegor256.jhome;
+Path java = new Jhome().java();
+Path javac = new Jhome().javac();
+```
 
 ## How to Contribute
 
-Fork repository, make changes, send us a [pull request](https://www.yegor256.com/2014/04/15/github-guidelines.html).
+Fork repository, make changes, send us
+a [pull request](https://www.yegor256.com/2014/04/15/github-guidelines.html).
 We will review your changes and apply them to the `master` branch shortly,
 provided they don't violate our quality standards. To avoid frustration,
 before sending us your pull request please run full Maven build:
