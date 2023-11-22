@@ -26,6 +26,9 @@ package com.yegor256;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.condition.DisabledOnOs;
+import org.junit.jupiter.api.condition.EnabledOnOs;
+import org.junit.jupiter.api.condition.OS;
 
 /**
  * Test case for {@link Jhome}.
@@ -59,9 +62,19 @@ final class JhomeTest {
     }
 
     @Test
+    @DisabledOnOs(OS.WINDOWS)
     void findsRealFile() {
         MatcherAssert.assertThat(
             new Jhome().path("bin/java").toFile().exists(),
+            Matchers.is(true)
+        );
+    }
+
+    @Test
+    @EnabledOnOs(OS.WINDOWS)
+    void findsRealExeFile() {
+        MatcherAssert.assertThat(
+            new Jhome().path("bin\\java.exe").toFile().exists(),
             Matchers.is(true)
         );
     }
