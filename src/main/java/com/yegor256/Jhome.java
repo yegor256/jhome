@@ -73,7 +73,7 @@ public final class Jhome {
      * @return The path of it
      */
     public Path java() {
-        return this.path("bin/java").resolve(Jhome.extension());
+        return this.path(String.format("bin/java%s", Jhome.extension()));
     }
 
     /**
@@ -85,7 +85,7 @@ public final class Jhome {
      *  {@code Optional<Path>} is also a solution here.
      */
     public Path javac() {
-        return this.path("bin/javac").resolve(Jhome.extension());
+        return this.path(String.format("bin/javac%s", Jhome.extension()));
     }
 
     /**
