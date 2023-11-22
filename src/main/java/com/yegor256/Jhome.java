@@ -27,7 +27,6 @@ import java.io.File;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
-import java.util.Locale;
 
 /**
  * Finds {@code JAVA_HOME} even if the environment variable is not set.
