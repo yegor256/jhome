@@ -87,6 +87,18 @@ SOFTWARE.
       <build>
         <plugins>
           <plugin>
+            <groupId>com.github.volodya-lombrozo</groupId>
+            <artifactId>jtcop-maven-plugin</artifactId>
+            <version>1.1.1</version>
+            <executions>
+              <execution>
+                <goals>
+                  <goal>check</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+          <plugin>
             <groupId>com.qulice</groupId>
             <artifactId>qulice-maven-plugin</artifactId>
             <version>0.22.0</version>

@@ -48,6 +48,7 @@ final class JhomeTest {
     @Test
     void findsHome() {
         MatcherAssert.assertThat(
+            "Default home should lead to an existing folder",
             new Jhome().path().toFile().exists(),
             Matchers.is(true)
         );
@@ -56,6 +57,7 @@ final class JhomeTest {
     @Test
     void findsCorrectHome() {
         MatcherAssert.assertThat(
+            "Bin folder should exist in the JAVA_HOME folder",
             new Jhome().path().resolve("bin").toFile().exists(),
             Matchers.is(true)
         );
