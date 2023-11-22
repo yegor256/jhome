@@ -111,12 +111,25 @@ final class JhomeTest {
         );
     }
 
+    @Test
     @EnabledOnOs(OS.WINDOWS)
     void findsRealExeFileOnWindowsOs() {
         MatcherAssert.assertThat(
             "java.exe binary file doesn't exist. If you run this test, then you should have a JDK or JRE installed",
             new Jhome().java().toFile().exists(),
             Matchers.is(true)
+        );
+    }
+
+    @Test
+    void getsJavaVersion() {
+        MatcherAssert.assertThat(
+            "Java version can't be read",
+            new Jaxec()
+                .with(new Jhome().java().toString())
+                .with("-version")
+                .exec(),
+            Matchers.is(Matchers.notNullValue())
         );
     }
 }

@@ -83,6 +83,14 @@ SOFTWARE.
       <url>https://github.com/yegor256/jhome</url>
     </site>
   </distributionManagement>
+  <dependencies>
+    <dependency>
+      <groupId>com.yegor256</groupId>
+      <artifactId>jaxec</artifactId>
+      <version>0.0.5</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
   <profiles>
     <profile>
       <id>qulice</id>
