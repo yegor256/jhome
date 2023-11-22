@@ -27,6 +27,7 @@ import java.io.File;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
+import java.util.Locale;
 
 /**
  * Finds {@code JAVA_HOME} even if the environment variable is not set.
@@ -72,7 +73,7 @@ public final class Jhome {
      * @return The path of it
      */
     public Path java() {
-        return this.path("bin/java");
+        return this.path("bin/java").resolve(Jhome.extension());
     }
 
     /**
@@ -84,7 +85,23 @@ public final class Jhome {
      *  {@code Optional<Path>} is also a solution here.
      */
     public Path javac() {
-        return this.path("bin/javac");
+        return this.path("bin/javac").resolve(Jhome.extension());
+    }
+
+    /**
+     * Find the extension of the executable file.
+     * - On Windows it is ".exe".
+     * - On Unix it is empty string.
+     * @return The extension.
+     */
+    private static String extension() {
+        final String result;
+        if (System.getProperty("os.name").toLowerCase(Locale.getDefault()).contains("windows")) {
+            result = ".exe";
+        } else {
+            result = "";
+        }
+        return result;
     }
 
     /**

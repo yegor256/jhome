@@ -23,6 +23,7 @@
  */
 package com.yegor256;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -62,14 +63,16 @@ final class JhomeTest {
 
     @Test
     void findsJavaOnAnyOs() throws IOException {
+        final File file = new Jhome().java().toFile();
         MatcherAssert.assertThat(
             String.format(
-                "java binary file doesn't exist. If you run this test, then you should have a JDK installed. All files in bin folder: %n%s",
+                "java binary file doesn't exist. If you run this test, then you should have a JDK installed. The file we received '%s'.%nAll files in bin folder: %n%s",
+                file,
                 Files.list(new Jhome().path("bin"))
                     .map(Path::toString)
                     .collect(Collectors.joining("\n"))
             ),
-            new Jhome().java().toFile(),
+            file,
             FileMatchers.anExistingFile()
         );
     }
@@ -82,14 +85,16 @@ final class JhomeTest {
     @Test
     @EnabledForJreRange(min = JRE.JAVA_9)
     void findsJavacOnAnyOs() throws IOException {
+        final File file = new Jhome().javac().toFile();
         MatcherAssert.assertThat(
             String.format(
-                "javac binary file doesn't exist. If you run this test, then you should have a JDK installed. All files in bin folder: %n%s",
+                "javac binary file doesn't exist. If you run this test, then you should have a JDK installed. The path that we received is '%s'.%nAll files in bin folder: %n%s",
+                file,
                 Files.list(new Jhome().path("bin"))
                     .map(Path::toString)
                     .collect(Collectors.joining("\n"))
             ),
-            new Jhome().javac().toFile(),
+            file,
             FileMatchers.anExistingFile()
         );
     }
