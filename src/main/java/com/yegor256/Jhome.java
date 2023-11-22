@@ -26,6 +26,7 @@ package com.yegor256;
 import java.io.File;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Arrays;
 
 /**
  * Finds {@code JAVA_HOME} even if the environment variable is not set.
@@ -55,22 +56,15 @@ public final class Jhome {
     }
 
     /**
-     * Get the {@code JAVA_HOME}.
-     * @return The path of it
-     */
-    public Path path() {
-        return this.home;
-    }
-
-    /**
      * Find the file inside {@code JAVA_HOME}.
      * @param loc Location, e.g. {@code "bin/java"}
      * @return The path of it
      */
-    public Path path(final String loc) {
-        return this.home.resolve(
-            loc.replace("/", File.separator).replace("\\", File.separator)
-        );
+    public Path path(final String... loc) {
+        return Arrays.stream(loc)
+            .map(subpath -> subpath.replace("/", File.separator).replace("\\", File.separator))
+            .map(Paths::get)
+            .reduce(this.home, Path::resolve);
     }
 
     /**
