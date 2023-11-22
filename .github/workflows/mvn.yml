@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - master
+      - 5_java_javac
   pull_request:
     branches:
       - master
@@ -13,8 +14,8 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ubuntu-20.04, macos-12, windows-2022]
-        java: [8, 11, 17, 21]
+        os: [ ubuntu-20.04, macos-12, windows-2022 ]
+        java: [ 8, 11, 17, 21 ]
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-java@v3
