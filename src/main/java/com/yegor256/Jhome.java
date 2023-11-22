@@ -57,7 +57,7 @@ public final class Jhome {
 
     /**
      * Find the file inside {@code JAVA_HOME}.
-     * @param loc Location, e.g. {@code "bin/java"}
+     * @param loc Location, e.g. {@code "bin/java"} relative to {@code JAVA_HOME}.
      * @return The path of it
      */
     public Path path(final String... loc) {
@@ -72,7 +72,7 @@ public final class Jhome {
      * @return The path of it
      */
     public Path java() {
-        return this.path("bin/java");
+        return this.path("bin/java").resolve(Jhome.extension());
     }
 
     /**
@@ -84,7 +84,21 @@ public final class Jhome {
      *  {@code Optional<Path>} is also a solution here.
      */
     public Path javac() {
-        return this.path("bin/javac");
+        return this.path("bin/javac").resolve(Jhome.extension());
+    }
+
+    /**
+     * Find the extension of the executable file.
+     * - On Windows it is ".exe".
+     * - On Unix it is empty string.
+     * @return The extension.
+     */
+    private static String extension() {
+        if (System.getProperty("os.name").toLowerCase().contains("windows")) {
+            return ".exe";
+        } else {
+            return "";
+        }
     }
 
     /**
@@ -107,5 +121,4 @@ public final class Jhome {
         }
         return base;
     }
-
 }
