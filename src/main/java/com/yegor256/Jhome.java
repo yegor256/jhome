@@ -95,9 +95,7 @@ public final class Jhome {
      */
     public Path javac() {
         final Path path = this.path(String.format("bin/javac%s", Jhome.extension()));
-        if (Files.exists(path)) {
-            return path;
-        } else {
+        if (!Files.exists(path)) {
             throw new IllegalStateException(
                 String.format(
                     "javac binary file doesn't exist in the home folder '%s'. Try to change home folder, or check if JDK is installed correctly.",
@@ -105,6 +103,7 @@ public final class Jhome {
                 )
             );
         }
+        return path;
     }
 
     /**
