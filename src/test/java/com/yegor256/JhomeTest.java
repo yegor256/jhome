@@ -112,6 +112,7 @@ final class JhomeTest {
             "Should throw IllegalStateException if javac binary file doesn't exist"
         );
         MatcherAssert.assertThat(
+            "Exception message should contain the path to the home folder",
             exception.getMessage(),
             Matchers.stringContainsInOrder(
                 String.format("javac binary file doesn't exist in the home folder '%s'", temp)
