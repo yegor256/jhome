@@ -53,7 +53,15 @@ public final class Jhome {
      * Ctor.
      */
     public Jhome() {
-        this.home = Jhome.base();
+        this(Jhome.base());
+    }
+
+    /**
+     * Constructor.
+     * @param home The home.
+     */
+    public Jhome(final Path home) {
+        this.home = home;
     }
 
     /**

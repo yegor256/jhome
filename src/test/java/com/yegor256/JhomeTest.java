@@ -31,12 +31,14 @@ import java.util.stream.Collectors;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.hamcrest.io.FileMatchers;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.condition.DisabledOnOs;
 import org.junit.jupiter.api.condition.EnabledForJreRange;
 import org.junit.jupiter.api.condition.EnabledOnOs;
 import org.junit.jupiter.api.condition.JRE;
 import org.junit.jupiter.api.condition.OS;
+import org.junit.jupiter.api.io.TempDir;
 
 /**
  * Test case for {@link Jhome}.
@@ -98,6 +100,21 @@ final class JhomeTest {
             ),
             file,
             FileMatchers.anExistingFile()
+        );
+    }
+
+    @Test
+    void throwsIfJavacNotFound(final @TempDir Path temp) {
+        final Jhome jhome = new Jhome(temp);
+        final IllegalStateException exception = Assertions.assertThrows(
+            IllegalStateException.class,
+            jhome::javac
+        );
+        MatcherAssert.assertThat(
+            exception.getMessage(),
+            Matchers.stringContainsInOrder(
+                String.format("javac binary file doesn't exist in the home folder '%s'", temp)
+            )
         );
     }
 
