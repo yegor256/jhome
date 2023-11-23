@@ -24,6 +24,7 @@
 package com.yegor256;
 
 import java.io.File;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
@@ -93,7 +94,17 @@ public final class Jhome {
      *  {@code Optional<Path>} is also a solution here.
      */
     public Path javac() {
-        return this.path(String.format("bin/javac%s", Jhome.extension()));
+        final Path path = this.path(String.format("bin/javac%s", Jhome.extension()));
+        if (Files.exists(path)) {
+            return path;
+        } else {
+            throw new IllegalStateException(
+                String.format(
+                    "javac binary file doesn't exist in the home folder '%s'. Try to change home folder, or check if JDK is installed correctly.",
+                    this.home
+                )
+            );
+        }
     }
 
     /**
