@@ -108,7 +108,8 @@ final class JhomeTest {
         final Jhome jhome = new Jhome(temp);
         final IllegalStateException exception = Assertions.assertThrows(
             IllegalStateException.class,
-            jhome::javac
+            jhome::javac,
+            "Should throw IllegalStateException if javac binary file doesn't exist"
         );
         MatcherAssert.assertThat(
             exception.getMessage(),
