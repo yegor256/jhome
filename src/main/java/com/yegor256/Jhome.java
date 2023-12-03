@@ -88,14 +88,9 @@ public final class Jhome {
     /**
      * Find the {@code javac} binary.
      * @return The path of it
-     * @todo #5 The javac binary might not be available in JRE.
-     *  We should check if we are running in JDK or JRE and somehow decide what to
-     *  return in this case or even throw an exception in case of JRE. Maybe an
-     *  {@code Optional<Path>} is also a solution here.
      */
     public Path javac() {
-        final Path path = this.path(String.format("bin/javac%s", Jhome.extension()));
-        if (!Files.exists(path)) {
+        if (!this.javacExists()) {
             throw new IllegalStateException(
                 String.format(
                     "javac binary file doesn't exist in the home folder '%s'. Try to change home folder, or check if JDK is installed correctly.",
@@ -103,7 +98,23 @@ public final class Jhome {
                 )
             );
         }
-        return path;
+        return this.javacPath();
+    }
+
+    /**
+     * Check if {@code javac} binary exists.
+     * @return True if it exists.
+     */
+    public boolean javacExists() {
+        return Files.exists(this.javacPath());
+    }
+
+    /**
+     * Find the {@code javac} binary.
+     * @return The path of it.
+     */
+    private Path javacPath() {
+        return this.path(String.format("bin/javac%s", Jhome.extension()));
     }
 
     /**

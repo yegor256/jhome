@@ -149,4 +149,13 @@ final class JhomeTest {
             Matchers.is(Matchers.notNullValue())
         );
     }
+
+    @Test
+    void checksIfJavacExists() {
+        MatcherAssert.assertThat(
+            "Javac binary file doesn't exist, but it should",
+            new Jhome().javacExists(),
+            Matchers.is(true)
+        );
+    }
 }
