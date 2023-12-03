@@ -150,7 +150,13 @@ final class JhomeTest {
         );
     }
 
+    /**
+     * Here we restrict the test to run only on Java 9+.
+     * Since before Java 9, the "javac" binary was shipped separately in JDK.
+     * After Java 9, we might be sure that javac is installed.
+     */
     @Test
+    @EnabledForJreRange(min = JRE.JAVA_9)
     void checksIfJavacExists() {
         MatcherAssert.assertThat(
             "Javac binary file doesn't exist, but it should",
