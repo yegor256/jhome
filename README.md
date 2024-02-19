@@ -8,7 +8,6 @@
 [![Javadoc](http://www.javadoc.io/badge/com.yegor256/jhome.svg)](http://www.javadoc.io/doc/com.yegor256/jhome)
 [![codecov](https://codecov.io/gh/yegor256/jhome/branch/master/graph/badge.svg)](https://codecov.io/gh/yegor256/jhome)
 [![Hits-of-Code](https://hitsofcode.com/github/yegor256/jhome)](https://hitsofcode.com/view/github/yegor256/jhome)
-![Lines of code](https://img.shields.io/tokei/lines/github/yegor256/jhome)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](https://github.com/yegor256/jhome/blob/master/LICENSE.txt)
 
 In your Java application you may want to run another Java application.
