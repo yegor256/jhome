@@ -1,3 +1,5 @@
+# Finds Absolute Path of JAVA_HOME in Runtime
+
 [![EO principles respected here](https://www.elegantobjects.org/badge.svg)](https://www.elegantobjects.org)
 [![DevOps By Rultor.com](http://www.rultor.com/b/yegor256/jhome)](http://www.rultor.com/p/yegor256/jhome)
 [![We recommend IntelliJ IDEA](https://www.elegantobjects.org/intellij-idea.svg)](https://www.jetbrains.com/idea/)
@@ -19,7 +21,6 @@ library.
 First, you add this to your `pom.xml`:
 
 ```xml
-
 <dependency>
   <groupId>com.yegor256</groupId>
   <artifactId>jhome</artifactId>
@@ -53,7 +54,7 @@ provided they don't violate our quality standards. To avoid frustration,
 before sending us your pull request please run full Maven build:
 
 ```bash
-$ mvn clean install -Pqulice
+mvn clean install -Pqulice
 ```
 
 You will need Maven 3.3+ and Java 8+.
