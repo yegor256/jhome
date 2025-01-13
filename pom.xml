@@ -98,6 +98,7 @@ SOFTWARE.
         <os>
           <family>unix</family>
         </os>
+        <jdk>[11,)</jdk>
       </activation>
       <build>
         <plugins>
