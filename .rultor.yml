@@ -21,7 +21,7 @@
 # SOFTWARE.
 ---
 docker:
-  image: yegor256/rultor-image:1.22.0
+  image: yegor256/rultor-java
 assets:
   settings.xml: yegor256/home#assets/jhome/settings.xml
   pubring.gpg: yegor256/home#assets/pubring.gpg
@@ -37,4 +37,4 @@ release:
     mvn versions:set "-DnewVersion=${tag}" -Dstyle.color=never
     git commit -am "${tag}"
     mvn clean install -Dinvoker.skip
-    mvn clean deploy -Pjhome -Psonatype --errors --settings ../settings.xml -Dstyle.color=never
+    mvn clean deploy -Pjhome,sonatype -e -s ../settings.xml -Dstyle.color=never
