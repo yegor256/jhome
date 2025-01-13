@@ -33,7 +33,7 @@ jobs:
       - uses: actions/setup-java@v4
         with:
           distribution: 'temurin'
-          java-version: 11
+          java-version: 21
       - uses: actions/cache@v4
         with:
           path: ~/.m2/repository
@@ -44,5 +44,3 @@ jobs:
       - uses: codecov/codecov-action@v4.0.0-beta.3
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
-          file: ./target/site/jacoco/jacoco.xml
-          fail_ci_if_error: true
