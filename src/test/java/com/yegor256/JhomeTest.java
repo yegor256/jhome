@@ -22,7 +22,6 @@ import org.junit.jupiter.api.io.TempDir;
 
 /**
  * Test case for {@link Jhome}.
- *
  * @since 0.1.0
  */
 final class JhomeTest {
@@ -54,7 +53,7 @@ final class JhomeTest {
                 file,
                 Files.list(new Jhome().path("bin"))
                     .map(Path::toString)
-                    .collect(Collectors.joining("\n"))
+                    .collect(Collectors.joining(System.lineSeparator()))
             ),
             file,
             FileMatchers.anExistingFile()
@@ -76,7 +75,7 @@ final class JhomeTest {
                 file,
                 Files.list(new Jhome().path("bin"))
                     .map(Path::toString)
-                    .collect(Collectors.joining("\n"))
+                    .collect(Collectors.joining(System.lineSeparator()))
             ),
             file,
             FileMatchers.anExistingFile()
