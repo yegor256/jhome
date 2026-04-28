@@ -27,6 +27,11 @@ import java.util.Locale;
 public final class Jhome {
 
     /**
+     * Default home, computed from {@code java.home} or {@code JAVA_HOME}.
+     */
+    private static final Path DEFAULT_HOME = Jhome.base();
+
+    /**
      * Home, where {@code JAVA_HOME} points to.
      */
     private final Path home;
@@ -35,12 +40,12 @@ public final class Jhome {
      * Ctor.
      */
     public Jhome() {
-        this(Jhome.base());
+        this(Jhome.DEFAULT_HOME);
     }
 
     /**
      * Constructor.
-     * @param home The home.
+     * @param home The home
      */
     public Jhome(final Path home) {
         this.home = home;
@@ -48,7 +53,7 @@ public final class Jhome {
 
     /**
      * Find the file inside {@code JAVA_HOME}.
-     * @param loc Location, e.g. {@code "bin/java"} relative to {@code JAVA_HOME}.
+     * @param loc Location, e.g. {@code "bin/java"} relative to {@code JAVA_HOME}
      * @return The path of it
      */
     public Path path(final String... loc) {
@@ -84,7 +89,7 @@ public final class Jhome {
 
     /**
      * Check if {@code javac} binary exists.
-     * @return True if it exists.
+     * @return True if it exists
      */
     public boolean javacExists() {
         return Files.exists(this.javacPath());
@@ -92,7 +97,7 @@ public final class Jhome {
 
     /**
      * Find the {@code javac} binary.
-     * @return The path of it.
+     * @return The path of it
      */
     private Path javacPath() {
         return this.path(String.format("bin/javac%s", Jhome.extension()));
@@ -102,7 +107,7 @@ public final class Jhome {
      * Find the extension of the executable file.
      * - On Windows it is ".exe".
      * - On Unix it is empty string.
-     * @return The extension.
+     * @return The extension
      */
     private static String extension() {
         final String result;

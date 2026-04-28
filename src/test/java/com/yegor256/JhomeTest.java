@@ -17,13 +17,11 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.condition.DisabledOnOs;
 import org.junit.jupiter.api.condition.EnabledForJreRange;
 import org.junit.jupiter.api.condition.EnabledOnOs;
-import org.junit.jupiter.api.condition.JRE;
 import org.junit.jupiter.api.condition.OS;
 import org.junit.jupiter.api.io.TempDir;
 
 /**
  * Test case for {@link Jhome}.
- *
  * @since 0.1.0
  */
 final class JhomeTest {
@@ -55,7 +53,7 @@ final class JhomeTest {
                 file,
                 Files.list(new Jhome().path("bin"))
                     .map(Path::toString)
-                    .collect(Collectors.joining("\n"))
+                    .collect(Collectors.joining(System.lineSeparator()))
             ),
             file,
             FileMatchers.anExistingFile()
@@ -68,7 +66,7 @@ final class JhomeTest {
      * JRE pack did not contain it.
      */
     @Test
-    @EnabledForJreRange(min = JRE.JAVA_9)
+    @EnabledForJreRange(minVersion = 9)
     void findsJavacOnAnyOs() throws IOException {
         final File file = new Jhome().javac().toFile();
         MatcherAssert.assertThat(
@@ -77,7 +75,7 @@ final class JhomeTest {
                 file,
                 Files.list(new Jhome().path("bin"))
                     .map(Path::toString)
-                    .collect(Collectors.joining("\n"))
+                    .collect(Collectors.joining(System.lineSeparator()))
             ),
             file,
             FileMatchers.anExistingFile()
@@ -137,7 +135,7 @@ final class JhomeTest {
      * After Java 9, we might be sure that javac is installed.
      */
     @Test
-    @EnabledForJreRange(min = JRE.JAVA_9)
+    @EnabledForJreRange(minVersion = 9)
     void checksIfJavacExists() {
         MatcherAssert.assertThat(
             "Javac binary file doesn't exist, but it should",
