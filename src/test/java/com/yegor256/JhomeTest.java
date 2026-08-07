@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.hamcrest.io.FileMatchers;
@@ -47,13 +48,16 @@ final class JhomeTest {
     @Test
     void findsJavaOnAnyOs() throws IOException {
         final File file = new Jhome().java().toFile();
+        final String listing;
+        try (Stream<Path> files = Files.list(new Jhome().path("bin"))) {
+            listing = files.map(Path::toString)
+                .collect(Collectors.joining(System.lineSeparator()));
+        }
         MatcherAssert.assertThat(
             String.format(
                 "java binary file doesn't exist. If you run this test, then you should have a JDK installed. The file we received '%s'.%nAll files in bin folder: %n%s",
                 file,
-                Files.list(new Jhome().path("bin"))
-                    .map(Path::toString)
-                    .collect(Collectors.joining(System.lineSeparator()))
+                listing
             ),
             file,
             FileMatchers.anExistingFile()
@@ -69,13 +73,16 @@ final class JhomeTest {
     @EnabledForJreRange(minVersion = 9)
     void findsJavacOnAnyOs() throws IOException {
         final File file = new Jhome().javac().toFile();
+        final String listing;
+        try (Stream<Path> files = Files.list(new Jhome().path("bin"))) {
+            listing = files.map(Path::toString)
+                .collect(Collectors.joining(System.lineSeparator()));
+        }
         MatcherAssert.assertThat(
             String.format(
                 "javac binary file doesn't exist. If you run this test, then you should have a JDK installed. The path that we received is '%s'.%nAll files in bin folder: %n%s",
                 file,
-                Files.list(new Jhome().path("bin"))
-                    .map(Path::toString)
-                    .collect(Collectors.joining(System.lineSeparator()))
+                listing
             ),
             file,
             FileMatchers.anExistingFile()
