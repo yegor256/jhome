@@ -16,7 +16,7 @@ import java.util.Locale;
  *
  * <p>Use it like this:</p>
  *
- * <code><pre> Path p = new Jhome().path("bin/java");</pre></code>
+ * <pre><code> Path p = new Jhome().path("bin/java");</code></pre>
  *
  * <p>You will get the absolute location of the {@code bin/java}
  * executable binary, if it exists. If it doesn't exist, a runtime

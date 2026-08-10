@@ -10,7 +10,7 @@
  *
  * <p>It is as simple as the following:</p>
  *
- * <code><pre> Path p = new Jhome().path("bin/javac");</pre></code>
+ * <pre><code> Path p = new Jhome().path("bin/javac");</code></pre>
  *
  * @since 0.0.1
  */
