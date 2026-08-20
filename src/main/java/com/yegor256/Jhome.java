@@ -95,20 +95,10 @@ public final class Jhome {
         return Files.exists(this.javacPath());
     }
 
-    /**
-     * Find the {@code javac} binary.
-     * @return The path of it
-     */
     private Path javacPath() {
         return this.path(String.format("bin/javac%s", Jhome.extension()));
     }
 
-    /**
-     * Find the extension of the executable file.
-     * - On Windows it is ".exe".
-     * - On Unix it is empty string.
-     * @return The extension
-     */
     private static String extension() {
         final String result;
         if (System.getProperty("os.name").toLowerCase(Locale.getDefault()).contains("windows")) {
@@ -119,10 +109,6 @@ public final class Jhome {
         return result;
     }
 
-    /**
-     * Find home.
-     * @return The path of it
-     */
     private static Path base() {
         final Path base;
         final String property = System.getProperty("java.home");
