@@ -45,6 +45,7 @@ public final class Jhome {
 
     /**
      * Constructor.
+     *
      * @param home The home
      */
     public Jhome(final Path home) {
@@ -53,6 +54,7 @@ public final class Jhome {
 
     /**
      * Find the file inside {@code JAVA_HOME}.
+     *
      * @param loc Location, e.g. {@code "bin/java"} relative to {@code JAVA_HOME}
      * @return The path of it
      */
@@ -65,6 +67,7 @@ public final class Jhome {
 
     /**
      * Find the {@code java} binary.
+     *
      * @return The path of it
      */
     public Path java() {
@@ -73,6 +76,7 @@ public final class Jhome {
 
     /**
      * Find the {@code javac} binary.
+     *
      * @return The path of it
      */
     public Path javac() {
@@ -89,6 +93,7 @@ public final class Jhome {
 
     /**
      * Check if {@code javac} binary exists.
+     *
      * @return True if it exists
      */
     public boolean javacExists() {

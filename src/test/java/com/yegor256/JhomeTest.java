@@ -23,6 +23,7 @@ import org.junit.jupiter.api.io.TempDir;
 
 /**
  * Test case for {@link Jhome}.
+ *
  * @since 0.1.0
  */
 final class JhomeTest {
