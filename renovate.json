@@ -1,8 +1,20 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": [
-    "config:base"
-  ],
   "automerge": true,
+  "extends": [
+    "config:recommended"
+  ],
+  "packageRules": [
+    {
+      "allowedVersions": "<22",
+      "description": "Keep coverage on Java 21 while ProGuard requires JMOD files",
+      "matchDepNames": [
+        "java-jdk"
+      ],
+      "matchManagers": [
+        "github-actions"
+      ]
+    }
+  ],
   "platformAutomerge": false
 }
