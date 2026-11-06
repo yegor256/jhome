@@ -20,7 +20,7 @@ jobs:
         with:
           distribution: 'temurin'
           # ProGuard requires the jmods directory, absent from newer Temurin builds.
-          java-version: '21'
+          java-version: '22'
       - uses: actions/cache@v6
         with:
           path: ~/.m2/repository
