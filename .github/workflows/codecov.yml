@@ -7,6 +7,9 @@ name: codecov
   push:
     branches:
       - master
+  pull_request:
+    branches:
+      - master
 jobs:
   codecov:
     timeout-minutes: 15
@@ -16,7 +19,8 @@ jobs:
       - uses: actions/setup-java@v6
         with:
           distribution: 'temurin'
-          java-version: 25.0.5+8.0.LTS
+          # ProGuard requires the jmods directory, absent from newer Temurin builds.
+          java-version: '21'
       - uses: actions/cache@v6
         with:
           path: ~/.m2/repository
