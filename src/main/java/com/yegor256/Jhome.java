@@ -128,6 +128,15 @@ public final class Jhome {
         } else {
             base = Paths.get(property);
         }
-        return base;
+        final Path result;
+        final Path name = base.getFileName();
+        final Path parent = base.getParent();
+        if (name != null && "jre".equals(name.toString()) && parent != null
+            && Files.exists(parent.resolve(String.format("bin/javac%s", Jhome.extension())))) {
+            result = parent;
+        } else {
+            result = base;
+        }
+        return result;
     }
 }
