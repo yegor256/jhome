@@ -106,6 +106,21 @@ final class JhomeTest {
     }
 
     @Test
+    void throwsIfJavaNotFound(final @TempDir Path temp) {
+        MatcherAssert.assertThat(
+            "Exception message should contain the path to the home folder",
+            Assertions.assertThrows(
+                IllegalStateException.class,
+                new Jhome(temp)::java,
+                "Should throw IllegalStateException if java binary file doesn't exist"
+            ).getMessage(),
+            Matchers.stringContainsInOrder(
+                String.format("java binary file doesn't exist in the home folder '%s'", temp)
+            )
+        );
+    }
+
+    @Test
     @DisabledOnOs(OS.WINDOWS)
     void findsRealFileOnUnixOs() {
         MatcherAssert.assertThat(

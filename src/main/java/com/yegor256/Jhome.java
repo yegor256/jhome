@@ -71,7 +71,16 @@ public final class Jhome {
      * @return The path of it
      */
     public Path java() {
-        return this.path(String.format("bin/java%s", Jhome.extension()));
+        final Path result = this.path(String.format("bin/java%s", Jhome.extension()));
+        if (!Files.exists(result)) {
+            throw new IllegalStateException(
+                String.format(
+                    "java binary file doesn't exist in the home folder '%s'. Try to change home folder, or check if JRE is installed correctly.",
+                    this.home
+                )
+            );
+        }
+        return result;
     }
 
     /**
